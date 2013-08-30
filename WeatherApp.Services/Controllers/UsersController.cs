@@ -46,13 +46,11 @@ namespace WeatherApp.Services.Controllers
                     this.ValidateAuthCode(model.AuthCode);
 
                     var usernameToLower = model.Username.ToLower();
-                    var nameToLower = model.Name.ToLower();
-                    var user = dbContext.Users.FirstOrDefault(u => u.Username.ToLower() == usernameToLower
-                        || u.Name.ToLower() == nameToLower);
+                    var user = dbContext.Users.FirstOrDefault(u => u.Username.ToLower() == usernameToLower);
 
                     if (user != null)
                     {
-                        throw new InvalidOperationException("Users exists");
+                        throw new InvalidOperationException("Username is already taken!");
                     }
 
                     user = new User()
